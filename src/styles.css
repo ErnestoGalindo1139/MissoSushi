@@ -5,8 +5,8 @@
 .video {
     z-index: -12;
     position: relative;
-    max-height: 50rem;
-    min-height: 20rem;
+    max-height: 31rem;
+    min-height: 10rem;
     overflow: hidden;
     /*video{
         margin-top: -2rem;
@@ -31,20 +31,12 @@
 }
 .video h2 {
     color: #f9ebeb;
-    font-size: 8rem;
-    padding-left: 4rem;
     display: block;
     white-space: nowrap;
     border-right: 4px solid;
     width: 7ch;
     animation: typing 1s steps(20), blink 0.5s infinite step-end alternate;
     overflow: hidden;
-}
-@media (min-width: 768px) {
-    .video h2 {
-        font-size: 8rem;
-        padding-left: 3rem;
-    }
 }
 
 @keyframes typing {

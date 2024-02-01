@@ -9,7 +9,7 @@ export const MissoSushiApp = () => {
             <div className="video ">
                 <div className="overlay">
                     <div className=" contenido-video">
-                        <h2>MISSO</h2>
+                        <h2 className="text-[5rem] md:text-[8rem] pl-4 md:pl-12">MISSO</h2>
 
                     </div>
                 </div>
