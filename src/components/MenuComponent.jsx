@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
     Accordion,
     AccordionHeader,
     AccordionBody,
     Typography,
 } from "@material-tailwind/react";
+import { empanizados, horneados, naturales } from "../data/platillosMenu";
 
 function Icon({ id, open }) {
     return (
@@ -21,50 +22,97 @@ function Icon({ id, open }) {
     );
 }
 
-const horneados = [
-    { nombre: 'Exclusivo Especial', descripcion: 'Dentro: camaron, queso, aguacate y pepino. Por fuera: tampico, encima spicy de cangrejo, aguacate, camarones empanizados y salsa de anguila', precio: 95, imagen: './assets/platillos/gohan.png'},
-    { nombre: 'House Especial', descripcion: 'Dentro: camaron, queso, aguacate, pepino, surimi, Por fuera: aguacate, encima pate de la casa y salsa de anguila', precio: 95, imagen: './assets/platillos/ConchaMisso.png'},
-    { nombre: 'Beluma Especial', descripcion: 'Dentro: camaron, queso, aguacate, pepino. Por fuera: salmon, tampico, encima pate con siracha, aguacate y salsa de anguila', precio: 100, imagen: './assets/platillos/yakimeshi.jpg'},
-    { nombre: 'Misso Especial', descripcion: 'Dentro: camaron, queso, aguacate y pepino. Por fuera: tampico, encima spicy de la casa, camarones empanizados, aguacate, queso chihuahua y salsa de anguila', precio: 100, imagen: './assets/platillos/CevicheMisso.webp'},
-    { nombre: 'De Todo Especial', descripcion: 'Dentro: camaron, queso, aguacate, pepino y carne. Por fuera: tampico, camarones empanizados, tocino, aguacate, queso chihuahua y salsa de anguila', precio: 115, imagen: './assets/platillos/kucheague.png'},
-    { nombre: 'Dokio Especias', descripcion: 'Dentro: camaron, queso y pepino. Por fuera: tampico, camarones empanizados, encima spicy de la casa, aguacate, queso chihuahua y salsa de anguila', precio: 95, imagen: './assets/platillos/chilesEmpanizados.jpg'},
-]
-
 export const MenuComponent = () => {
-    const [openAccordions, setOpenAccordions] = useState([]);
-    const handleOpen = (index) => {
-        // Verifica si el índice ya está en el array
-        if (openAccordions.includes(index)) {
-        // Si está, lo remueve
-        setOpenAccordions(openAccordions.filter((item) => item !== index));
-        } else {
-        // Si no está, lo agrega
-        setOpenAccordions([...openAccordions, index]);
+    const [openHorneados, setOpenHorneados] = useState([]);
+    const [openEmpanizados, setOpenEmpanizados] = useState([]);
+    const [openNaturales, setOpenNaturales] = useState([]);
+
+    const handleOpen = (category, index) => {
+        switch (category) {
+            case 'horneados':
+                setOpenHorneados(openHorneados.includes(index) ? openHorneados.filter((item) => item !== index) : [...openHorneados, index]);
+                break;
+            case 'empanizados':
+                setOpenEmpanizados(openEmpanizados.includes(index) ? openEmpanizados.filter((item) => item !== index) : [...openEmpanizados, index]);
+                break;
+            case 'naturales':
+                setOpenNaturales(openNaturales.includes(index) ? openNaturales.filter((item) => item !== index) : [...openNaturales, index]);
+                break;
+            default:
+                break;
         }
     };
 
     return (
         <>
-
-            <Typography variant="h2" className="text-center">Horneados</Typography>
-            <div className="w-[100rem] mx-auto mb-40 p-6 grid grid-cols-2 gap-x-10 gap-y-2">
-            {
-                horneados.map((horneado, index) => (
-                    <Accordion key={index} open={openAccordions.includes(index + 1)} icon={<Icon id={index + 1} open={openAccordions} />}>
-                    <AccordionHeader onClick={() => handleOpen(index + 1)} className="border rounded-md p-3 bg-[#b49b85] text-black shadow-xl">{horneado.nombre}</AccordionHeader>
-                    <AccordionBody className="flex mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md">
-                        <img className="w-[180px] h-[180px] rounded-md" src={horneado.imagen} alt={horneado.imagen} />
-                        <div className="ml-3">
-                            <h3 className="font-bold text-lg text-black mt-5">
-                                {horneado.nombre} - <span className="text-[#22c55e]">${horneado.precio} <em>MXN</em></span>
-                            </h3>
-                            <p className="mt-2 text-black">{horneado.descripcion}</p>
-                        </div>
-                    </AccordionBody>
-                    </Accordion>
-                ))
+            {/* Horneados */}
             
-            }
+            <div className="xl:w-[60rem] 2xl:w-[100rem] mx-auto mb-10 p-6 grid grid-cols-3 gap-x-4">
+                <div>
+                    <Typography variant="h2" className="text-center mb-3">Horneados</Typography>
+                    {
+                        horneados.map((horneado, index) => (
+                            <Accordion key={index} open={openHorneados.includes(index + 1)} icon={<Icon id={index + 1} open={openHorneados} />}>
+                            <AccordionHeader onClick={() => handleOpen('horneados', index + 1)} className="border rounded-md p-3 bg-[#b49b85] text-black shadow-xl my-1">{horneado.nombre}</AccordionHeader>
+                            <AccordionBody className="flex mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md">
+                                <img className="w-[180px] h-[180px] rounded-md" src={horneado.imagen} alt={horneado.imagen} />
+                                <div className="ml-3">
+                                    <h3 className="font-bold text-lg text-black mt-5">
+                                        {horneado.nombre} - <span className="text-[#22c55e]">${horneado.precio} <em>MXN</em></span>
+                                    </h3>
+                                    <p className="mt-2 text-black">{horneado.descripcion}</p>
+                                </div>
+                            </AccordionBody>
+                            </Accordion>
+                        ))
+                    }
+                </div>
+
+                <div>
+                    {/* Empanizados */}
+                    <Typography variant="h2" className="text-center mb-3">Empanizados</Typography>
+                    <div>
+                        {
+                            empanizados.map((empanizado, index) => (
+                                <Accordion key={index} open={openEmpanizados.includes(index + 1)} icon={<Icon id={index + 1} open={openEmpanizados} />}>
+                                <AccordionHeader onClick={() => handleOpen('empanizados', index + 1)} className="border rounded-md p-3 bg-[#b49b85] text-black shadow-xl my-1">{empanizado.nombre}</AccordionHeader>
+                                <AccordionBody className="flex mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md">
+                                    <img className="w-[180px] h-[180px] rounded-md" src={empanizado.imagen} alt={empanizado.imagen} />
+                                    <div className="ml-3">
+                                        <h3 className="font-bold text-lg text-black mt-5">
+                                            {empanizado.nombre} - <span className="text-[#22c55e]">${empanizado.precio} <em>MXN</em></span>
+                                        </h3>
+                                        <p className="mt-2 text-black">{empanizado.descripcion}</p>
+                                    </div>
+                                </AccordionBody>
+                                </Accordion>
+                            ))
+                        }
+                    </div>
+                </div>
+
+                <div>
+                    {/* Naturales */}
+                    <Typography variant="h2" className="text-center mb-3">Naturales</Typography>
+                    <div>
+                        {
+                            naturales.map((naturales, index) => (
+                                <Accordion key={index} open={openNaturales.includes(index + 1)} icon={<Icon id={index + 1} open={openNaturales} />}>
+                                <AccordionHeader onClick={() => handleOpen('naturales', index + 1)} className="border rounded-md p-3 bg-[#b49b85] text-black shadow-xl my-1">{naturales.nombre}</AccordionHeader>
+                                <AccordionBody className="flex mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md">
+                                    <img className="w-[180px] h-[180px] rounded-md" src={naturales.imagen} alt={naturales.imagen} />
+                                    <div className="ml-3">
+                                        <h3 className="font-bold text-lg text-black mt-5">
+                                            {naturales.nombre} - <span className="text-[#22c55e]">${naturales.precio} <em>MXN</em></span>
+                                        </h3>
+                                        <p className="mt-2 text-black">{naturales.descripcion}</p>
+                                    </div>
+                                </AccordionBody>
+                                </Accordion>
+                            ))
+                        }
+                    </div>
+                </div>
             </div>
         </>
     );
