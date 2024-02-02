@@ -4,9 +4,9 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
     { name: 'Ubicacion', href: '#'},
-    { name: 'Horneados', href: '#'},
-    { name: 'Empanizados', href: '#'},
-    { name: 'Naturales', href: '#'},
+    { name: 'Especialidades', href: '#'},
+    { name: 'Menú', href: '#'},
+    { name: 'Contacto', href: '#'},
 ]
 
 function classNames(...classes) {
@@ -15,7 +15,7 @@ function classNames(...classes) {
 
 export const Navbar = () => {
     return (
-        <Disclosure as="nav" className="bg-gray-800">
+        <Disclosure as="nav" className="bg-[#000000]">
         {({ open }) => (
             <>
             <div className="max-w-full ">

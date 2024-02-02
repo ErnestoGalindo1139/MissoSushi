@@ -57,4 +57,11 @@
     background-position: center center;
 }
 
+/* Especialidades */
+.especialidades {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    background-color: #292c37;
+    /* background-color: #374151; */
+}
 
