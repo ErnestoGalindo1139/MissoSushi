@@ -6,6 +6,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 import { empanizados, horneados, naturales } from "../data/platillosMenu";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 function Icon({ id, open }) {
     return (
@@ -23,6 +24,9 @@ function Icon({ id, open }) {
 }
 
 export const MenuComponent = () => {
+
+    const menuRef = useScrollAnimation(0.05, 'animate__lightSpeedInRight');
+
     const [openHorneados, setOpenHorneados] = useState([]);
     const [openEmpanizados, setOpenEmpanizados] = useState([]);
     const [openNaturales, setOpenNaturales] = useState([]);
@@ -46,17 +50,16 @@ export const MenuComponent = () => {
     return (
         <>
             {/* Horneados */}
-            
-            <div className="xl:w-[60rem] 2xl:w-[100rem] mx-auto mb-10 p-6 grid grid-cols-3 gap-x-4">
+            <div ref={menuRef} id="menu" className="xl:w-[60rem] 2xl:w-[100rem] mx-auto mb-20 p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-4">
                 <div>
                     <Typography variant="h2" className="text-center mb-3">Horneados</Typography>
                     {
                         horneados.map((horneado, index) => (
                             <Accordion key={index} open={openHorneados.includes(index + 1)} icon={<Icon id={index + 1} open={openHorneados} />}>
                             <AccordionHeader onClick={() => handleOpen('horneados', index + 1)} className="border rounded-md p-3 bg-[#b49b85] text-black shadow-xl my-1">{horneado.nombre}</AccordionHeader>
-                            <AccordionBody className="flex mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md">
-                                <img className="w-[180px] h-[180px] rounded-md" src={horneado.imagen} alt={horneado.imagen} />
-                                <div className="ml-3">
+                            <AccordionBody className="flex flex-col 2xl:flex-row mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md pb-2 sm:pb-2 2xl:pb-0">
+                                <img className="sm:w-full sm:h-[200px] 2xl:w-[180px] 2xl:h-[180px] rounded-s-md p-0 m-0" src={horneado.imagen} alt={horneado.imagen} />
+                                <div className="mx-2 md:ml-3 sm:mx-2 text-justify">
                                     <h3 className="font-bold text-lg text-black mt-5">
                                         {horneado.nombre} - <span className="text-[#22c55e]">${horneado.precio} <em>MXN</em></span>
                                     </h3>
@@ -70,15 +73,15 @@ export const MenuComponent = () => {
 
                 <div>
                     {/* Empanizados */}
-                    <Typography variant="h2" className="text-center mb-3">Empanizados</Typography>
+                    <Typography variant="h2" className="text-center mt-8 mb-8 sm:mt-0 sm:mb-3">Empanizados</Typography>
                     <div>
                         {
                             empanizados.map((empanizado, index) => (
                                 <Accordion key={index} open={openEmpanizados.includes(index + 1)} icon={<Icon id={index + 1} open={openEmpanizados} />}>
                                 <AccordionHeader onClick={() => handleOpen('empanizados', index + 1)} className="border rounded-md p-3 bg-[#b49b85] text-black shadow-xl my-1">{empanizado.nombre}</AccordionHeader>
-                                <AccordionBody className="flex mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md">
-                                    <img className="w-[180px] h-[180px] rounded-md" src={empanizado.imagen} alt={empanizado.imagen} />
-                                    <div className="ml-3">
+                                <AccordionBody className="flex flex-col 2xl:flex-row mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md pb-2 sm:pb-2 2xl:pb-0">
+                                    <img className="sm:w-full sm:h-[200px] 2xl:w-[180px] 2xl:h-[180px] rounded-s-md" src={empanizado.imagen} alt={empanizado.imagen} />
+                                    <div className="mx-2 md:ml-3 sm:mx-2 text-justify">
                                         <h3 className="font-bold text-lg text-black mt-5">
                                             {empanizado.nombre} - <span className="text-[#22c55e]">${empanizado.precio} <em>MXN</em></span>
                                         </h3>
@@ -93,15 +96,15 @@ export const MenuComponent = () => {
 
                 <div>
                     {/* Naturales */}
-                    <Typography variant="h2" className="text-center mb-3">Naturales</Typography>
+                    <Typography variant="h2" className="text-center mt-8 mb-8 sm:mt-0 sm:mb-3">Naturales</Typography>
                     <div>
                         {
                             naturales.map((naturales, index) => (
                                 <Accordion key={index} open={openNaturales.includes(index + 1)} icon={<Icon id={index + 1} open={openNaturales} />}>
                                 <AccordionHeader onClick={() => handleOpen('naturales', index + 1)} className="border rounded-md p-3 bg-[#b49b85] text-black shadow-xl my-1">{naturales.nombre}</AccordionHeader>
-                                <AccordionBody className="flex mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md">
-                                    <img className="w-[180px] h-[180px] rounded-md" src={naturales.imagen} alt={naturales.imagen} />
-                                    <div className="ml-3">
+                                <AccordionBody className="flex flex-col 2xl:flex-row mt-2 mb-5 bg-gray-100 rounded-md py-0 border-2 shadow-md pb-2 sm:pb-2 2xl:pb-0">
+                                    <img className="sm:w-full sm:h-[200px] 2xl:w-[180px] 2xl:h-[180px] rounded-s-md" src={naturales.imagen} alt={naturales.imagen} />
+                                    <div className="mx-2 md:ml-3 sm:mx-2 text-justify">
                                         <h3 className="font-bold text-lg text-black mt-5">
                                             {naturales.nombre} - <span className="text-[#22c55e]">${naturales.precio} <em>MXN</em></span>
                                         </h3>
